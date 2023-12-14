@@ -5,7 +5,7 @@
 > [paho](https://eclipse.dev/paho/)
 >
 - `spring-integration-mqtt` ->  <https://github.com/eclipse/paho.mqtt.java>
-- <https://github.com/eclipse/paho.mqtt.rust>
+- [paho-mqtt](<https://crates.io/crates/paho-mqtt>) <https://github.com/eclipse/paho.mqtt.rust>
 - <https://github.com/eclipse/paho.mqtt.golang>
 
 ## 1 Start Broker
@@ -31,7 +31,8 @@ emqx start
 ```
 
 ```sh
-$ emqx ctl status                                                                                                                                                  1 ↵
+$ emqx ctl status
+
 Node 'emqx@127.0.0.1' 5.3.2 is started
 ```
 
@@ -45,7 +46,7 @@ emqx stop
 
 ## 2 Build Client
 
-### hello-mqtt-java
+### hello-mqtt-java build
 
 `build.sh`
 
@@ -53,9 +54,15 @@ emqx stop
 mvn clean install -DskipTests
 ```
 
+### hello-mqtt-rust build
+
+```sh
+cargo build
+```
+
 ## 3 Run Client
 
-### hello-mqtt-java
+### hello-mqtt-java run
 
 #### service
 
@@ -81,7 +88,22 @@ cd mqtt-sensor
 mvn spring-boot:run 
 ```
 
+### hello-mqtt-rust run
+
+#### sub
+
+```sh
+cargo run --bin sub
+```
+
+#### pub
+
+```sh
+cargo run --bin pub
+```
+
 ## Reference
 
 - <https://github.com/gregwhitaker/springboot-mqtt-example>
 - <https://dzone.com/refcardz/getting-started-with-mqtt>
+- <https://www.emqx.com/en/blog/how-to-use-mqtt-in-rust>
