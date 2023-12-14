@@ -1,6 +1,6 @@
 # Hello MQTT
 
-![hello-mqtt](doc/hello-mqtt.drawio.png)
+<img src="doc/hello-mqtt.drawio.png" alt="hello-mqtt" style="width:400px" />
 
 > [paho](https://eclipse.dev/paho/)
 >
@@ -8,23 +8,44 @@
 - <https://github.com/eclipse/paho.mqtt.rust>
 - <https://github.com/eclipse/paho.mqtt.golang>
 
-## 1 Start 
+## 1 Start Broker
 
-[Eclipse Mosquitto](https://mosquitto.org/)
+### [Eclipse Mosquitto](https://mosquitto.org/)
 
 ```sh
-# brew install mosquitto
-
+brew install mosquitto
 ```
 
-[EMQX](https://github.com/emqx/emqx)
+```sh
+sh start_mosquito.sh
+```
+
+### [EMQX](https://github.com/emqx/emqx)
 
 ```sh
 brew install emqx
+```
+
+```sh
 emqx start
 ```
 
-2 Build
+```sh
+$ emqx ctl status                                                                                                                                                  1 ↵
+Node 'emqx@127.0.0.1' 5.3.2 is started
+```
+
+```sh
+emqx stop
+```
+
+[MQTTX Web](https://mqttx.app/web)
+
+<http://localhost:18083/> The default user name and password are `admin` & `public`
+
+## 2 Build Client
+
+### hello-mqtt-java
 
 `build.sh`
 
@@ -32,30 +53,32 @@ emqx start
 mvn clean install -DskipTests
 ```
 
-3 Run 
+## 3 Run Client
 
-service
+### hello-mqtt-java
 
-`start-service.sh`
+#### service
+
+`start_service.sh`
 
 ```sh
 cd mqtt-service 
 mvn spring-boot:run 
 ```
 
-sensor
+`look_up.sh`
 
-`start-sensor.sh`
+```sh
+curl http://localhost:8080/temps/stats
+```
+
+#### sensor
+
+`start_sensor.sh`
 
 ```sh
 cd mqtt-sensor 
 mvn spring-boot:run 
-```
-
-4 Look up stats
-
-```sh
-curl http://localhost:8080/temps/stats
 ```
 
 ## Reference

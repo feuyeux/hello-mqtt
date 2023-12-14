@@ -11,5 +11,6 @@ else
      echo ""
 fi
 
+#mosquitto_passwd -c conf/mosquitto_pwfile.example admin
 cp conf/mosquitto_pwfile.example /tmp/mosquitto/pwfile.example
 mosquitto -c $(pwd)/conf/mosquitto.conf
