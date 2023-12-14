@@ -6,7 +6,7 @@
 >
 - `spring-integration-mqtt` ->  <https://github.com/eclipse/paho.mqtt.java>
 - [paho-mqtt](<https://crates.io/crates/paho-mqtt>) <https://github.com/eclipse/paho.mqtt.rust>
-- <https://github.com/eclipse/paho.mqtt.golang>
+- [go-mqtt]() <https://github.com/eclipse/paho.mqtt.golang>
 
 ## 1 Start Broker
 
@@ -60,6 +60,14 @@ mvn clean install -DskipTests
 cargo build
 ```
 
+### hello-mqtt-go build
+
+```sh
+go env -w GOPROXY=https://goproxy.cn,direct
+go get github.com/eclipse/paho.mqtt.golang
+go build
+```
+
 ## 3 Run Client
 
 ### hello-mqtt-java run
@@ -102,8 +110,16 @@ cargo run --bin sub
 cargo run --bin pub
 ```
 
+### hello-mqtt-go run
+
+```sh
+go run main.go
+```
+
 ## Reference
 
 - <https://github.com/gregwhitaker/springboot-mqtt-example>
 - <https://dzone.com/refcardz/getting-started-with-mqtt>
+- <https://www.emqx.com/en/blog/how-to-use-mqtt-in-java>
 - <https://www.emqx.com/en/blog/how-to-use-mqtt-in-rust>
+- <https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang>

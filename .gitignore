@@ -2,6 +2,9 @@
 target/
 *.bkp
 *.dtmp
+Cargo.lock
+go.sum
+.vscode
 
 ### STS ###
 .apt_generated
@@ -24,3 +27,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle
+
+hello-mqtt
