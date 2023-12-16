@@ -1,8 +1,10 @@
 package io.emqx.mqtt;
 
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+@Slf4j
 public class SubscribeSample {
     public static void main(String[] args) {
 
@@ -24,25 +26,25 @@ public class SubscribeSample {
             client.setCallback(new MqttCallback() {
 
                 public void connectionLost(Throwable cause) {
-                    System.out.println("connectionLost: " + cause.getMessage());
+                    log.info("connectionLost: " + cause.getMessage());
                 }
 
                 public void messageArrived(String topic, MqttMessage message) {
-                    System.out.println("topic: " + topic);
-                    System.out.println("Qos: " + message.getQos());
-                    System.out.println("message content: " + new String(message.getPayload()));
+                    log.info("topic: " + topic);
+                    log.info("Qos: " + message.getQos());
+                    log.info("message content: " + new String(message.getPayload()));
 
                 }
 
                 public void deliveryComplete(IMqttDeliveryToken token) {
-                    System.out.println("deliveryComplete---------" + token.isComplete());
+                    log.info("deliveryComplete---------" + token.isComplete());
                 }
 
             });
             client.connect(options);
             client.subscribe(topic, qos);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("", e);
         }
     }
 }
