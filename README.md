@@ -6,7 +6,7 @@
 >
 - `spring-integration-mqtt` ->  <https://github.com/eclipse/paho.mqtt.java>
 - [paho-mqtt](<https://crates.io/crates/paho-mqtt>) <https://github.com/eclipse/paho.mqtt.rust>
-- [go-mqtt]() <https://github.com/eclipse/paho.mqtt.golang>
+- [go-mqtt](github.com/eclipse/paho.mqtt.golang) <https://github.com/eclipse/paho.mqtt.golang>
 
 ## 1 Start Broker
 
@@ -40,11 +40,67 @@ Node 'emqx@127.0.0.1' 5.3.2 is started
 emqx stop
 ```
 
-[MQTTX Web](https://mqttx.app/web)
+#### [MQTTX Web](https://mqttx.app/web)
 
 <http://localhost:18083/> The default user name and password are `admin` & `public`
 
+#### [EMQX 文档](https://www.emqx.io/docs/zh/latest/)
+
+[API 密钥](http://localhost:18083/#/api-key) 设置`API Key`和`Secret Key`
+
+ak:9b71d224bd62f378
+sk:mz0kFjgqbHPTUTAiBFcoY4rbmIsD3QXwJbaKQcNErlI
+
+[HTTP API](http://localhost:18083/api-docs/index.html)
+
+```sh
+curl -i \
+-u 9b71d224bd62f378:mz0kFjgqbHPTUTAiBFcoY4rbmIsD3QXwJbaKQcNErlI \
+"http://localhost:18083/api/v5/nodes"
+
+curl -i \
+-u 9b71d224bd62f378:mz0kFjgqbHPTUTAiBFcoY4rbmIsD3QXwJbaKQcNErlI \
+"http://localhost:18083/api/v5/topics"
+
+curl -i \
+-u 9b71d224bd62f378:mz0kFjgqbHPTUTAiBFcoY4rbmIsD3QXwJbaKQcNErlI \
+"http://localhost:18083/api/v5/trace"
+```
+
+<http://localhost:18083/api-docs/index.html#/Publish/post_publish>
+
+```sh
+curl -i \
+-u 9b71d224bd62f378:mz0kFjgqbHPTUTAiBFcoY4rbmIsD3QXwJbaKQcNErlI \
+-X 'POST' \
+  'http://localhost:18083/api/v5/publish' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "topic": "mqtt/test",
+  "payload": "hello emqx api"
+}'
+```
+
+<http://localhost:18083/api-docs/index.html#/Clients/post_clients__clientid__subscribe>
+
+```sh
+curl -i \
+    -u 9b71d224bd62f378:mz0kFjgqbHPTUTAiBFcoY4rbmIsD3QXwJbaKQcNErlI \
+    -X 'POST' \
+    "http://localhost:18083/api/v5/clients/java_publish_client/subscribe" \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{
+   "topic": "mqtt/test"
+}'
+```
+
+<https://www.emqx.io/docs/zh/latest/deploy/upgrade-from-v4.html#http-api>
+
 ## 2 Build Client
+
+> 使用emqx实验时，确保<http://localhost:18083/#/authentication>页面中没有配置
 
 ### hello-mqtt-java build
 
@@ -120,6 +176,4 @@ go run main.go
 
 - <https://github.com/gregwhitaker/springboot-mqtt-example>
 - <https://dzone.com/refcardz/getting-started-with-mqtt>
-- <https://www.emqx.com/en/blog/how-to-use-mqtt-in-java>
-- <https://www.emqx.com/en/blog/how-to-use-mqtt-in-rust>
-- <https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang>
+- [MQTT 客户端编程](https://www.emqx.io/docs/zh/latest/tutorial/mqtt-programming.html)
