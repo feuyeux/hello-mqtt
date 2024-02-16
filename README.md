@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 -->
+
 # Hello MQTT
 
 <img src="doc/hello-mqtt.drawio.png" alt="hello-mqtt" style="width:400px" />
